@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall_Behavior : MonoBehaviour
+public class Ball_Behavior : MonoBehaviour
 {
-    [SerializeField] private GameObject ref_camera = null;
+    [SerializeField] private ParticleSystem ref_particles_collision;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ref_camera.GetComponent<Effect_Shake>().Shake();
+        ref_particles_collision.Play();
     }
 }
