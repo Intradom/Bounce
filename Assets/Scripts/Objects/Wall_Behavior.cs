@@ -8,6 +8,6 @@ public class Wall_Behavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ref_camera.GetComponent<Effect_Shake>().Shake();
+        //ref_camera.GetComponent<Effect_Shake>().Shake();
     }
 }

@@ -54,7 +54,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4545120511437167681}
-  - component: {fileID: 1464714801}
   m_Layer: 9
   m_Name: Cannon_shot
   m_TagString: Untagged
@@ -76,18 +75,6 @@ Transform:
   m_Father: {fileID: 4545120510833463465}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1464714801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4545120511437167710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b926e0b424cc1244492628eb186141e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4545120511866722217
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +122,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -154,13 +141,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f52f33325446044d839b25b8a503a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ref_GM: {fileID: 0}
   ref_camera: {fileID: 0}
   ref_rbody: {fileID: 3951995743343757825}
-  ref_shoot_loc: {fileID: 4545120511437167710}
   ref_shoot_object: {fileID: 7635684826242057766, guid: 48ab5ec8b53db894984dc9bf3d27fdc9,
     type: 3}
-  rot_torque: 2
-  shot_power: 1
+  ref_pivot_loc: {fileID: 4545120510833463462}
+  ref_shoot_loc: {fileID: 4545120511437167710}
+  points_worth: 1
+  angle_limit: 70
+  shot_power: 500
 --- !u!1 &4545120512717931068
 GameObject:
   m_ObjectHideFlags: 0

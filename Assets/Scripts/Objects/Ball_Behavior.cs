@@ -10,4 +10,10 @@ public class Ball_Behavior : MonoBehaviour
     {
         ref_particles_collision.Play();
     }
+
+    private void OnBecameInvisible()
+    {
+        // If ball leaves screen, destroy
+        Destroy(this.gameObject);
+    }
 }
