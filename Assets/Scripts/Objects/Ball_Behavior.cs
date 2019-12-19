@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball_Behavior : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem ref_particles_collision;
+    [SerializeField] private ParticleSystem ref_particles_collision = null;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
