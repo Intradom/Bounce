@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3158507282217712904}
   m_Layer: 9
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Cannon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -151,6 +151,9 @@ MonoBehaviour:
   points_worth: 1
   angle_limit: 70
   shot_power: 500
+  PID_P: 1
+  PID_I: 0
+  PID_D: 0.2
 --- !u!1 &4545120512717931068
 GameObject:
   m_ObjectHideFlags: 0

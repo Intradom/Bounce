@@ -10,9 +10,25 @@ public class Cannon_Behavior : MonoBehaviour
     [SerializeField] private GameObject ref_shoot_object = null;
     [SerializeField] private GameObject ref_pivot_loc = null;
     [SerializeField] private GameObject ref_shoot_loc = null;
+    //[SerializeField] private string stop_tag = null;
+
     [SerializeField] private int points_worth = 1;
+    //[SerializeField] private float turn_speed_scale = 1f;
     [SerializeField] private float angle_limit = 70f;
     [SerializeField] private float shot_power = 1f;
+    [SerializeField] private float PID_P = 1f;
+    [SerializeField] private float PID_I = 0f;
+    [SerializeField] private float PID_D = 0.1f;
+
+    //private int movement_locked = 0;
+    private float PID_cumulative_error;
+    private float PID_last_error;
+
+    private void Start()
+    {
+        PID_cumulative_error = 0;
+        PID_last_error = 0;
+    }
 
     private void Update()
     {
@@ -25,6 +41,27 @@ public class Cannon_Behavior : MonoBehaviour
 
         float angle = -Mathf.Atan2(diff_x, diff_y) * Mathf.Rad2Deg;
         float clamped_angle = Mathf.Clamp(angle, -angle_limit, angle_limit);
+
+        /* Non physics based approach
+        if (movement_locked == 0)
+        {
+            ref_rbody.MoveRotation(clamped_angle);
+        }
+        */
+
+        /* Rigidbody2D physics approach */
+        float angle_error = Mathf.DeltaAngle(ref_pivot_loc.transform.eulerAngles.z, clamped_angle);
+        //Debug.Log(angle_error);
+
+        /* PID */
+        float error_diff = (angle_error - PID_last_error) / Time.deltaTime;
+        PID_last_error = angle_error;
+        PID_cumulative_error += angle_error;
+        float PID_sum = PID_P * angle_error + PID_I * PID_cumulative_error + PID_D * error_diff;
+
+        ref_rbody.AddTorque(PID_sum, ForceMode2D.Force);
+        //ref_rbody.angularVelocity = d_angle * turn_speed_scale;
+
         //float angle_diff = angle - ref_pivot_loc.transform.rotation.eulerAngles.z;
         //Debug.Log(angle_diff);
         //Quaternion target_angle = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -33,7 +70,7 @@ public class Cannon_Behavior : MonoBehaviour
         //*/
 
         //float mouse_move = -Input.GetAxis("Mouse X");
-        ref_rbody.MoveRotation(clamped_angle);
+
 
         /* Shooting */
         if (Input.GetButtonDown("Shoot"))
@@ -49,4 +86,22 @@ public class Cannon_Behavior : MonoBehaviour
             ref_camera.GetComponent<Effect_Shake>().Shake();
         }
     }
+
+    /*
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == stop_tag)
+        {
+            movement_locked += 1;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == stop_tag)
+        {
+            movement_locked -= 1;
+        }
+    }
+    */
 }

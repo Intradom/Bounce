@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wall_Behavior : MonoBehaviour
 {
-    [SerializeField] private GameObject ref_camera = null;
+    //[SerializeField] private GameObject ref_camera = null;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
